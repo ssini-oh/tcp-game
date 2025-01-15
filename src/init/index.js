@@ -1,4 +1,5 @@
 // 서버 초기화 작업
+// 서버 키면 작동됨
 import { testAllConnections } from '../utils/db/testConnection.js';
 import { loadGameAssets } from './assets.js';
 import { loadProtos } from './loadProtos.js';

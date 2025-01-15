@@ -19,7 +19,7 @@ export const packetParser = (data) => {
 
   const handlerId = packet.handlerId;
   const userId = packet.userId;
-  const clientVersion = packet.clientVersion;
+  const clientVersion = packet.version;
   const sequence = packet.sequence;
 
   // 클라이언트 버전 검증

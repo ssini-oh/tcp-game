@@ -6,6 +6,7 @@ import { getUserById } from '../../session/user.session.js';
 import CustomError from '../../utils/error/customError.js';
 import { ErrorCodes } from '../../utils/error/errorCodes.js';
 
+// 게임 세션에 유저 아이디 집어 넣음
 export const joinGameHandler = ({ socket, userId, payload }) => {
   try {
     const { gameId } = payload;

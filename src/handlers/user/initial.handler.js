@@ -1,4 +1,4 @@
-// 가장 최초에 접속했을 때 호출되는 핸들러
+// 가장 최초에 접속했을 때 호출되는 핸들러 (클라에서 서버 접속 시)
 import { addUser } from '../../session/user.session.js';
 import { HANDLER_IDS, RESPONSE_SUCCESS_CODE } from '../../constants/handlerIds.js';
 import { createResponse } from '../../utils/response/createResponse.js';
