@@ -9,12 +9,12 @@ import updateLocationHandler from './game/updateLocation.handler.js';
 const handlers = {
   [HANDLER_IDS.INITIAL]: {
     handler: initialHandler,
-    protoType: 'initial.InitialPacket',
+    protoType: 'initial.InitialPayload',
   },
-  [HANDLER_IDS.CREATE_GAME]: {
-    handler: createGameHandler,
-    protoType: 'game.CreateGamePayload',
-  },
+  // [HANDLER_IDS.CREATE_GAME]: {
+  //   handler: createGameHandler,
+  //   protoType: 'game.CreateGamePayload',
+  // },
   [HANDLER_IDS.JOIN_GAME]: {
     handler: joinGameHandler,
     protoType: 'game.JoinGamePayload',

@@ -7,12 +7,9 @@ import { getUserById } from '../../session/user.session.js';
 import CustomError from '../../utils/error/customError.js';
 import { ErrorCodes } from '../../utils/error/errorCodes.js';
 
-// 서버에서도 방 안만들고 바로 들어갈 수 있게 변경 필요함
-
 const createGameHandler = ({ socket, userId, payload }) => {
   try {
     const gameId = uuidv4();
-    // 방 만듬
     const gameSession = addGameSession(gameId);
 
     const user = getUserById(userId);
@@ -21,14 +18,14 @@ const createGameHandler = ({ socket, userId, payload }) => {
     }
     gameSession.addUser(user);
 
-    const createGameResponse = createResponse(
-      HANDLER_IDS.CREATE_GAME,
-      RESPONSE_SUCCESS_CODE,
-      { gameId, message: '게임이 생성되었습니다.' },
-      userId,
-    );
+    // const createGameResponse = createResponse(
+    //   HANDLER_IDS.CREATE_GAME,
+    //   RESPONSE_SUCCESS_CODE,
+    //   { gameId, message: '게임이 생성되었습니다.' },
+    //   userId,
+    // );
 
-    socket.write(createGameResponse);
+    // socket.write(createGameResponse);
   } catch (error) {
     handleError(socket, error);
   }

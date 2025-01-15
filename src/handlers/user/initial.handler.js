@@ -4,10 +4,11 @@ import { HANDLER_IDS, RESPONSE_SUCCESS_CODE } from '../../constants/handlerIds.j
 import { createResponse } from '../../utils/response/createResponse.js';
 import { handleError } from '../../utils/error/errorHandler.js';
 import { findUserByDeviceId, createUser, updateUserLogin } from '../../db/user/user.db.js';
+import { getGameSession } from '../../session/game.session.js';
 
 const initialHandler = async ({ socket, userId, payload }) => {
   try {
-    const { deviceId } = payload;
+    const { deviceId, playerId, latency } = payload;
 
     let user = await findUserByDeviceId(deviceId);
 
@@ -16,14 +17,28 @@ const initialHandler = async ({ socket, userId, payload }) => {
     } else {
       await updateUserLogin(user.id);
     }
+    // console.log(user);
+    // console.log(userId); // 디바이스 아이디
 
-    addUser(socket, user.id);
+    console.log(playerId);
+    console.log(latency);
+
+    // 유저 세션 추가
+    const userSession = addUser(socket, userId);
+    userSession.playerId = playerId;
+    userSession.latency = latency;
+
+    console.log(userSession);
+
+    // 게임 세션에 자동 등록
+    const gameSession = getGameSession();
+    gameSession.addUser(userSession);
 
     // 유저 정보 응답 생성
     const initialResponse = createResponse(
       HANDLER_IDS.INITIAL,
       RESPONSE_SUCCESS_CODE,
-      { userId: user.id },
+      { userId: user.id, gameId: gameSession.id, message: '게임에 입장하였습니다.' },
       deviceId,
     );
 

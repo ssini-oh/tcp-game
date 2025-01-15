@@ -100,15 +100,15 @@ client.connect(PORT, HOST, async () => {
   await sendPacket(client, successPacket);
   await delay(500);
 
-  const createGamePacket = createPacket(
-    4,
-    { timestamp: Date.now() },
-    '1.0.0',
-    'game',
-    'CreateGamePayload',
-  );
+  // const createGamePacket = createPacket(
+  //   4,
+  //   { timestamp: Date.now() },
+  //   '1.0.0',
+  //   'game',
+  //   'CreateGamePayload',
+  // );
 
-  await sendPacket(client, createGamePacket);
+  // await sendPacket(client, createGamePacket);
 });
 
 client.on('data', (data) => {
