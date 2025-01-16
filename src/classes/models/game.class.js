@@ -9,7 +9,7 @@ const MAX_PLAYERS = 50;
 class Game {
   constructor(id) {
     this.id = id;
-    this.users = [];
+    this.users = []; // 게임 세션에 참여한 유저들
     this.intervalManager = new IntervalManager();
     this.state = 'waiting'; // 'waiting', 'inProgress'
   }
@@ -59,13 +59,15 @@ class Game {
     });
   }
 
-  getAllLocation() {
+  getAllLocation(userId) {
     const maxLatency = this.getMaxLatency();
 
-    const locationData = this.users.map((user) => {
-      const { x, y } = user.calculatePosition(maxLatency);
-      return { id: user.id, x, y };
-    });
+    const locationData = this.users
+      .filter((user) => user.id !== userId)
+      .map((user) => {
+        const { x, y } = user.calculatePosition(maxLatency);
+        return { id: user.id, x, y };
+      });
     return createLocationPacket(locationData);
   }
 }
