@@ -8,21 +8,19 @@ import { getGameSession } from '../../session/game.session.js';
 
 const initialHandler = async ({ socket, userId, payload }) => {
   try {
-    const { deviceId, playerId, latency } = payload;
+    const { deviceId, playerId, latency, x = 0, y = 0 } = payload;
 
     let user = await findUserByDeviceId(deviceId);
-
     if (!user) {
-      user = await createUser(deviceId);
+      user = await createUser(deviceId, x, y);
     } else {
-      await updateUserLogin(user.id);
+      await updateUserLogin(deviceId, user.x, user.y);
     }
 
     // 유저 세션 추가
-    const userSession = addUser(socket, userId);
+    const userSession = addUser(socket, userId, user.x, user.y);
     userSession.playerId = playerId;
     userSession.latency = latency;
-
     console.log('initialHandler 호출-userSession', userSession);
 
     // 게임 세션에 자동 등록
@@ -33,11 +31,10 @@ const initialHandler = async ({ socket, userId, payload }) => {
     const initialResponse = createResponse(
       HANDLER_IDS.INITIAL,
       RESPONSE_SUCCESS_CODE,
-      { userId: user.id, gameId: gameSession.id, message: '게임에 입장하였습니다.' },
+      { userId: user.id, x: user.x, y: user.y, message: '게임에 입장하였습니다.' },
       deviceId,
     );
 
-    // 소켓을 통해 클라이언트에게 응답 메세지 전송
     socket.write(initialResponse);
   } catch (error) {
     handleError(socket, error);
