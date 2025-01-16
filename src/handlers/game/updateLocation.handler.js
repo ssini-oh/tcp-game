@@ -4,15 +4,22 @@ import CustomError from '../../utils/error/customError.js';
 import { ErrorCodes } from '../../utils/error/errorCodes.js';
 
 const updateLocationHandler = ({ socket, userId, payload }) => {
+  console.log('받은 패킷 데이터', payload);
+
   try {
-    const { gameId, x, y } = payload;
-    const gameSession = getGameSession(gameId);
+    const { x, y } = payload;
+    // console.log('게임 아이디', gameId);
+
+    const gameSession = getGameSession();
+    // const gameSession = getGameSession(gameId);
+    // console.log('게임 세션', gameSession);
 
     if (!gameSession) {
       throw new CustomError(ErrorCodes.GAME_NOT_FOUND, '게임 세션을 찾을 수 없습니다.');
     }
 
     const user = gameSession.getUser(userId);
+    console.log('유저', user);
     if (!user) {
       throw new CustomError(ErrorCodes.USER_NOT_FOUND, '유저를 찾을 수 없습니다.');
     }

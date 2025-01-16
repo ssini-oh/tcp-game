@@ -13,11 +13,8 @@ export const addGameSession = (id) => {
   const session = new Game(gameId);
   gameSessions.push(session);
   return session;
-
-  // const session = new Game(id);
-  // gameSessions.push(session);
-  // return session;
 };
+
 export const removeGameSession = (id) => {
   const index = gameSessions.findIndex((session) => session.id === id);
   if (index !== -1) {

@@ -10,6 +10,7 @@ import { ErrorCodes } from '../../utils/error/errorCodes.js';
 export const joinGameHandler = ({ socket, userId, payload }) => {
   try {
     const { gameId } = payload;
+    console.log('joinGameHandler 호출-gameId', gameId);
     const gameSession = getGameSession(gameId);
     if (!gameSession) {
       throw new CustomError(ErrorCodes.GAME_NOT_FOUND, '게임 세션을 찾을 수 없습니다.');

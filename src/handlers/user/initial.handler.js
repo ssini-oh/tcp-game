@@ -17,18 +17,13 @@ const initialHandler = async ({ socket, userId, payload }) => {
     } else {
       await updateUserLogin(user.id);
     }
-    // console.log(user);
-    // console.log(userId); // 디바이스 아이디
-
-    console.log(playerId);
-    console.log(latency);
 
     // 유저 세션 추가
     const userSession = addUser(socket, userId);
     userSession.playerId = playerId;
     userSession.latency = latency;
 
-    console.log(userSession);
+    console.log('initialHandler 호출-userSession', userSession);
 
     // 게임 세션에 자동 등록
     const gameSession = getGameSession();

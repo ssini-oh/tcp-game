@@ -2,7 +2,6 @@ import { HANDLER_IDS } from '../constants/handlerIds.js';
 import initialHandler from './user/initial.handler.js';
 import CustomError from '../utils/error/customError.js';
 import { ErrorCodes } from '../utils/error/errorCodes.js';
-import createGameHandler from './game/createGame.handler.js';
 import joinGameHandler from './game/joinGame.handler.js';
 import updateLocationHandler from './game/updateLocation.handler.js';
 
@@ -11,10 +10,7 @@ const handlers = {
     handler: initialHandler,
     protoType: 'initial.InitialPayload',
   },
-  // [HANDLER_IDS.CREATE_GAME]: {
-  //   handler: createGameHandler,
-  //   protoType: 'game.CreateGamePayload',
-  // },
+
   [HANDLER_IDS.JOIN_GAME]: {
     handler: joinGameHandler,
     protoType: 'game.JoinGamePayload',
