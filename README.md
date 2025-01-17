@@ -13,6 +13,7 @@
 - [라이선스](#라이선스)
 
 ## 프로젝트 소개
+![image](https://github.com/user-attachments/assets/e558a720-15f9-43f4-ad9a-8ba108b0ecb6)
 
 TCP 소켓 통신을 기반으로 한 실시간 멀티플레이어 게임 서버입니다. AWS RDS를 활용하여 안정적인 데이터베이스 운영과 실시간 게임 상태 동기화를 지원합니다.
 
